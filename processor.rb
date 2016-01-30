@@ -2,7 +2,7 @@ require 'erb'
 require 'rubygems'
 require 'crack'
 require 'json'
-require 'pry'
+
 #Preparing hash with list node and their children
 #EX : {"1234": { children: [{id: "2323",name: "child1"}], name: "parent" } }
 def build_children_hierarchy(taxonomy_hierarchy,parent,node)
@@ -71,7 +71,7 @@ begin
   #Iteraging through all destination and generating HTML for them
   destinations_array.each do |destination|
 
-    #Starting garbadge collection
+    #Starting garbadge collection to remove unwated objected from memory
     GC.stat
     
     tmp_hash = {}
@@ -105,6 +105,8 @@ rescue Exception => e
 end
 
 #Benchmark report to generate 30,000 files
+#Command used: time ruby processor.rb
+#Result :
 # real  0m48.538s
 # user  0m30.868s
 # sys 0m3.856s
