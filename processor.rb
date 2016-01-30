@@ -103,3 +103,8 @@ rescue Exception => e
   #As this is test project, I just catch Base Exception.
   puts "Exception occured => #{e.message}"
 end
+
+#Benchmark report to generate 30,000 files
+# real  0m48.538s
+# user  0m30.868s
+# sys 0m3.856s
