@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Lonely Planet</title>
+    <link href="./all.css" media="screen" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div id="container">
+      <div id="header">
+        <div id="logo"></div>
+        <h1>Lonely Planet: <%= destination[:title] %></h1>
+      </div>
+
+      <div id="wrapper">
+        <div id="sidebar">
+          <div class="block">
+            <h3>Navigation</h3>
+            <div class="content">
+              <div class="inner">
+                <% destination[:children].each do |h| %>
+                  <a href="<%= h[:id] %>.html"><%= h[:name] %></a></br>
+                <% end %>                
+                <% if destination[:parent] %>
+                  <a href="<%= destination[:parent][:id] %>.html"><%= destination[:parent][:name] %></a></br>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="main">
+          <div class="block">
+            <div class="secondary-navigation">
+              <ul>
+                <li class="first"><a href="#"> <%= destination[:title] %></a></li>
+              </ul>
+              <div class="clear"></div>
+            </div>
+            <div class="content">
+              <div class="inner">
+                <h2>History</h2>
+          		  <% destination[:history].each do |history|%>
+            		  <p>
+              		  <%= history %>
+              		</p>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
