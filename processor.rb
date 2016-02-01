@@ -2,7 +2,7 @@ require 'erb'
 require 'rubygems'
 require 'crack'
 require 'json'
-
+require 'logger'
 
 class Processor
 
@@ -10,6 +10,7 @@ class Processor
   TAXANOMY_FILE_PATH = './taxonomy.xml'
   DESTINATION_FILE_PATH = './destinations.xml'
   ERB_TEMPLATE_PATH = './template.html.erb'
+  LOGGER = Logger.new('processor.log')
 
 
   #Preparing hash with list node and their children
@@ -68,15 +69,19 @@ class Processor
       taxonomy_hierarchy = {}
 
       root_taxonomies = taxonomy_json["taxonomies"]["taxonomy"]
+      
+      LOGGER.info("Building Taxonomies children heirarchy")
+
       build_children_hierarchy(taxonomy_hierarchy,root_taxonomies["node"]["atlas_node_id"],root_taxonomies["node"])
 
       #Getting all destination nodes
       destinations_array =  destinations_json["destinations"]["destination"]
 
+      LOGGER.info("Creating HTML result folder")
       find_or_create_destination_folder
 
       #Iteraging through all destination and generating HTML for them
-      destinations_array.each do |destination|
+      destinations_array.each do |destination|        
 
         #Starting garbadge collection to remove unwated objected from memory
         GC.stat
@@ -99,6 +104,9 @@ class Processor
         result = renderer.result(b)
 
         html_file = "#{HTML_RESULT_FOLDER}/#{tmp_hash[:atlas_id]}.html"
+        
+        LOGGER.info("Writing destination HTML : #{html_file}")
+
         File.open(html_file, 'w') do |f|
           f.write(result)
         end
@@ -108,7 +116,10 @@ class Processor
     rescue Exception => e
       #We can handle specific exception to perform action.
       #As this is test project, I just catch Base Exception.
-      puts "Exception occured => #{e.message}"
+      puts "Exception occured => #{e.message}.\nCheck log for more information."
+      LOGGER.error("Exception Occurred : #{e.message}")
+      LOGGER.error(e.backtrace.join("\n"))
+
     end
 
   end
