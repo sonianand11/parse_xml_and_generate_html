@@ -19,3 +19,6 @@ generated_html contains resulting HTML with number as file name. This number idi
 Ex. desination with Atlas node id 355064 will be 355064.html
 
 Copy and paste all.css in generated_html folder for design and layout.
+
+To Test execute following command : 
+ruby test_processor.rb
