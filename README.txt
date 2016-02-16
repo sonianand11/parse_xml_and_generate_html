@@ -3,7 +3,6 @@ OS : Ubuntu 14.04
 Ruby version : 2.3.0
 
 Execute following commands to install required gem :
-gem install erb
 gem install crack
 gem install json
 
