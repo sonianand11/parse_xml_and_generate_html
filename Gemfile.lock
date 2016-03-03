@@ -1,0 +1,14 @@
+GEM
+  specs:
+    crack (0.4.3)
+      safe_yaml (~> 1.0.0)
+    safe_yaml (1.0.4)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  crack
+
+BUNDLED WITH
+   1.11.2
