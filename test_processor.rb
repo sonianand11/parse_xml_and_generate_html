@@ -1,6 +1,5 @@
 require_relative 'processor'
 require 'test/unit'
-require 'pry'
 
 class TestProcessor < Test::Unit::TestCase
  
